@@ -23,7 +23,8 @@ const Header = () => {
                 </IconButton>
                 <Typography variant='div' sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexGrow: 1  }}>
                   <Link to={'/'} style={{ textDecoration: 'none' }}>
-                    <Typography variant="h6" component="h1" sx={{ mr: '50%', color: mode === 'light' ? '#000' : '#fff', width: 'max-content'}} >Bot AI</Typography>
+                  <h1 style={{ color: mode === 'light' ? '#000' : '#fff', margin: 0 }}>Bot AI</h1>
+                    {/* <Typography variant="h6" component="h1" sx={{ mr: '50%', color: mode === 'light' ? '#000' : '#fff', width: 'max-content'}} >Bot AI</Typography> */}
                   </Link>
                   <IconButton onClick={() => setMode(prev => { if (prev === 'light') { return 'dark' } else { return 'light' }}) }>
                       {mode === "light" ? ( <LightModeIcon /> ) : ( <DarkModeIcon /> ) } 
