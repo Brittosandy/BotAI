@@ -43,7 +43,7 @@ const Header = () => {
             }}
           >
             <Link to="/" style={{ textDecoration: "none" }}>
-              <h1 style={{ color: mode === "light" ? "#000" : "#fff", margin: 0 }}>
+              <h1>
                 Bot AI
               </h1>
             </Link>
