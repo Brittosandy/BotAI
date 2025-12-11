@@ -42,11 +42,9 @@ const Header = () => {
               flexGrow: 1,
             }}
           >
-            <Link to="/" style={{ textDecoration: "none" }}>
               <h1>
                 Bot AI
               </h1>
-            </Link>
 
             <IconButton
               onClick={() =>
