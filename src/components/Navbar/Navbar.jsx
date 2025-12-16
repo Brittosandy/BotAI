@@ -58,22 +58,17 @@
 //   );
 // }
 
-import { Box, Typography } from "@mui/material";
+// src/components/Navbar/Navbar.jsx
+import { AppBar, Toolbar, Typography } from "@mui/material";
 
 export default function Navbar() {
   return (
-    <Box
-      component="header"
-      sx={{
-        padding: "16px",
-      }}
-    >
-      <Typography
-        component="h1"
-        variant="h4"
-      >
-        Bot AI
-      </Typography>
-    </Box>
+    <AppBar position="static" elevation={4}>
+      <Toolbar>
+        <Typography component="h1" variant="h4">
+          Bot AI
+        </Typography>
+      </Toolbar>
+    </AppBar>
   );
 }
