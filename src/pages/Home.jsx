@@ -1,15 +1,16 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
-import { Box, Stack } from '@mui/material';
+import { Stack} from '@mui/material';
+import InitialChat from '../components/InitialChat/InitialChat';
+import ChatInput from '../components/Chat/ChatInput';
+import ChattingCard from '../components/Card/ChattingCard';
+import FeedbackModal from '../components/FeedbackModal/FeedbackModal';
+import { useContext, useEffect, useRef, useState } from 'react';
+import data from '../aiData/sampleData.json';
 import { useOutletContext } from 'react-router-dom';
 import { ThemeContext } from '../theme/ThemeContext';
-import Header from '../components/Header/Header';
-import InitialChat from '../components/InitialChat/InitialChat';
-import Card from '../components/Card/Card';
-import Chat from '../components/Chat/Chat';
-import FeedbackModal from '../components/FeedbackModal/FeedbackModal';
-import mockData from '../api/sampleData.json';
+import Navbar from '../components/Navbar/Navbar';
 
-const Home = () => {
+export default function Home() {
+
     const { mode } = useContext(ThemeContext)
     const listRef = useRef(null)
     const { chat, setChat } = useOutletContext();
@@ -18,9 +19,10 @@ const Home = () => {
     const [scrollToBottom, setScrollToBottom] = useState(false)
     const [showModal, setShowModal] = useState(false)
     
+
     const generateResponse = (input) => {
 
-        const response = mockData.find(item => input.toLowerCase() === item.question.toLowerCase())
+        const response = data.find(item => input.toLowerCase() === item.question.toLowerCase())
 
         let answer = "Sorry, Did not understand your query!"
 
@@ -52,9 +54,21 @@ const Home = () => {
     }, [scrollToBottom])
 
   return (
-    <Stack height={'100vh'} justifyContent={'space-between'} sx={{ '@media (max-width:767px)': { background: mode === 'light' ? 'linear-gradient(#F9FAFA 60%, #EDE4FF)' : '' } }} >
-        <Header />
+    <Stack 
+    height={'100vh'} 
+    justifyContent={'space-between'} 
+    sx={{ 
+        '@media (max-width:767px)': {
+             background: mode === 'light' ? 'linear-gradient(#F9FAFA 60%, #EDE4FF)' : '' 
+             }
+              }} 
+              >
+
+
+        <Navbar />
+
         {chat.length === 0 && <InitialChat generateResponse={generateResponse} /> }
+
         {chat.length > 0 && (
             <Stack
                 height={1}
@@ -78,7 +92,7 @@ const Home = () => {
                 ref={listRef}
             >
                 {chat.map((item, index) => (
-                    <Card
+                    <ChattingCard
                         details={item}
                         key={index}
                         updateChat={setChat}
@@ -88,12 +102,21 @@ const Home = () => {
                 ))}
             </Stack>            
         )}
-        <Box component="div">
-            <Chat generateResponse={generateResponse} setScroll={setScrollToBottom} chat={chat} clearChat={() => setChat([])} />
-        </Box>
-        <FeedbackModal open={showModal} updateChat={setChat} chatId={selectedChatId} handleClose={() => setShowModal(false)} />
+        <ChatInput 
+        generateResponse={generateResponse} 
+        setScroll={setScrollToBottom} 
+        chat={chat} 
+        clearChat={() => setChat([])} 
+        />
+
+        <FeedbackModal 
+        open={showModal} 
+        updateChat={setChat} 
+        chatId={selectedChatId} 
+        handleClose={() => setShowModal(false)} 
+        />
+        
     </Stack>
   )
 }
 
-export default Home

@@ -1,8 +1,9 @@
-import React from 'react'
 import { Box, Typography, Stack, IconButton } from '@mui/material'
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import { styled } from '@mui/material/styles'
 
-const Card = ({ heading, subheading, handleClick }) => {
+export default function Card  ({ heading, subtext, handleClick })  {
+
   return (
     <Stack
       bgcolor={'primary.light'}
@@ -37,7 +38,7 @@ const Card = ({ heading, subheading, handleClick }) => {
               color={'text.secondary'}
               fontSize={{xs:10, md:16}}
           >
-              {subheading}
+              {subtext}
           </Typography>
       </Box>
       <IconButton size='small' sx={{ opacity: 0, bgcolor: 'primary.bglight', transition: 'opacity 400ms ease' }}>
@@ -47,4 +48,3 @@ const Card = ({ heading, subheading, handleClick }) => {
   )
 }
 
-export default Card

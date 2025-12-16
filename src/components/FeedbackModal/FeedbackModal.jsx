@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
 import { Box, Stack, Typography, Modal, IconButton, TextField, Button } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close';
-import Bulb from '../../assets/bulb.png';
-const FeedbackModal = ({ open, handleClose, chatId, updateChat }) => {
+import FeedbackIcon from '@mui/icons-material/Feedback';
+
+export default function FeedbackModal  ({ open, handleClose, chatId, updateChat })  {
+
     const [input, setInput] = useState('');
+
     const style = {
         position: 'absolute',
         top: '50%',
@@ -38,7 +41,7 @@ const FeedbackModal = ({ open, handleClose, chatId, updateChat }) => {
         <Box sx={style}>
             <Stack direction={'row'} spacing={2} alignItems={'center'} justifyContent={'space-between'}>
                 <Stack direction={'row'} spacing={{ xs: .5, md: 2 }} alignItems={'center'}>
-                    <Box component='img' src={Bulb} sx={{ width: { xs: 20, md: 24 } }} />
+                    <FeedbackIcon />
                     <Typography variant={'heading'} fontSize={{ xs: 14, md: 18 }}>
                         Provide Additional Feedback
                     </Typography>
@@ -79,4 +82,3 @@ const FeedbackModal = ({ open, handleClose, chatId, updateChat }) => {
   )
 }
 
-export default FeedbackModal

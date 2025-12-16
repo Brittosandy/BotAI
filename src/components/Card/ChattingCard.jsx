@@ -1,14 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Box, Stack, Typography, IconButton, Rating } from '@mui/material'
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
+// import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 import ai from '../../assets/logo.png'
 import human from '../../assets/user.png'
-import {convertTimestampToTime} from '../../utils';
-const Card = ({ details, showFeedbackModal, updateChat, setSelectedChatId, readOnly = false }) => {
+import { format } from 'date-fns';
+
+export default function ChattingCard({ details, showFeedbackModal, updateChat, setSelectedChatId, readOnly = false }) {
+
+
   const [isRating, setIsRating] = useState(false);
   const [rating, setRating] = useState(0);
+
+
   useEffect(() => {
 
     if (isRating) {
@@ -24,7 +30,8 @@ const Card = ({ details, showFeedbackModal, updateChat, setSelectedChatId, readO
         ))
     }
 
-}, [isRating, rating, details.id, updateChat]);
+}, [rating, isRating,details.id,updateChat]);
+
   return (
     <Stack
         p={{ xs: 1, md: 2 }}
@@ -36,7 +43,7 @@ const Card = ({ details, showFeedbackModal, updateChat, setSelectedChatId, readO
             '&:hover .feedback-btns': {
                 visibility: 'visible',
                 opacity: 1
-            }
+            },
         }}
         bgcolor={readOnly ? 'primary.main' : 'primary.light'}
     >
@@ -72,7 +79,8 @@ const Card = ({ details, showFeedbackModal, updateChat, setSelectedChatId, readO
                     fontSize={{ xs: 8, md: 12 }}
                     color={'text.secondary'}
                 >
-                    {convertTimestampToTime(details.time)}
+                    {format(details.time, "hh:mm a")}
+                    
                 </Typography>
                 {(details.type === "AI" && !readOnly) && (
                     <Stack
@@ -133,4 +141,3 @@ const Card = ({ details, showFeedbackModal, updateChat, setSelectedChatId, readO
   )
 }
 
-export default Card

@@ -1,9 +1,9 @@
-import React from 'react'
-import { Box, Typography, Stack, Grid2 } from '@mui/material'
+import { Box, Typography, Stack, Grid } from '@mui/material'
 import CenterLogo from '../../assets/center-logo.png';
 import Card from './Card';
 
-const InitialChat = ({generateResponse}) => {
+export default function InitialChat  ({generateResponse})  {
+
     const initialData = [
         {
             heading: 'Hi, what is the weather',
@@ -41,15 +41,14 @@ const InitialChat = ({generateResponse}) => {
                 borderRadius={'50%'}
             />
         </Stack>
-        <Grid2 container spacing={{ xs: 1, md: 3 }}>
+        <Grid container spacing={{ xs: 1, md: 3 }}>
             {initialData.map(item => (
-                <Grid2 key={item.heading} size={{ xs: 12, md: 6 }}>
-                    <Card heading={item.heading} subheading={item.subtext} handleClick={generateResponse} />
-                </Grid2>
+                <Grid key={item.heading} xs={12} md={6}>
+                    <Card heading={item.heading} subtext={item.subtext} handleClick={generateResponse} />
+                </Grid>
             ))}
-        </Grid2>
+        </Grid>
     </Stack>
   )
 }
 
-export default InitialChat

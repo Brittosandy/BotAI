@@ -1,11 +1,19 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { TextField, Box, Button, Stack, Snackbar } from '@mui/material'
+import { useEffect, useRef, useState } from 'react'
+import { TextField, Box, Button, Stack, Snackbar,useMediaQuery } from '@mui/material'
 import { Link } from 'react-router-dom'
 
-const Chat = ({ generateResponse, setScroll, chat, clearChat }) => {
+export default function ChatInput  ({ generateResponse, setScroll, chat, clearChat })  {
+    
     const [input, setInput] = useState('')
     const inputRef = useRef(null)
     const [showSnackbar, setShowSnackbar] = useState(false)
+
+        const handleSubmit = (e) => {
+        e.preventDefault()
+        generateResponse(input)
+        setInput('')
+        setScroll(prev => !prev)
+    }
 
     const handleSave = () => {
 
@@ -16,19 +24,20 @@ const Chat = ({ generateResponse, setScroll, chat, clearChat }) => {
         setShowSnackbar(true)
     }
     
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        generateResponse(input)
-        setInput('')
-        setScroll(prev => !prev)
-    }
+
     useEffect(() => {
         inputRef.current.focus()
     }, [])
+
+
   return (    
     <Box flexShrink={0} px={{ xs: .5, md: 3 }} pb={{ xs: 1, md: 3 }}>
         <Box component={'form'} onSubmit={handleSubmit}>
-            <Stack direction={'row'} spacing={{ xs: .5, md: 2 }} >
+            <Stack 
+            direction={'row'} 
+            spacing={{ xs: .5, md: 2 }} 
+            >
+
                 <TextField
                     placeholder='Message Bot AI...'
                     sx={{
@@ -81,7 +90,7 @@ const Chat = ({ generateResponse, setScroll, chat, clearChat }) => {
 
         <Snackbar
             open={showSnackbar}
-            message={'Chat saved.'}
+            message={"Chat saved."}
             onClose={() => setShowSnackbar(false)}
             autoHideDuration={5000}
             action={
@@ -94,4 +103,3 @@ const Chat = ({ generateResponse, setScroll, chat, clearChat }) => {
   )
 }
 
-export default Chat
