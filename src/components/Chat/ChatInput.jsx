@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { TextField, Box, Button, Stack, Snackbar,useMediaQuery } from '@mui/material'
+import { TextField, Box, Button, Stack, Snackbar } from '@mui/material'
 import { Link } from 'react-router-dom'
 
 export default function ChatInput  ({ generateResponse, setScroll, chat, clearChat })  {
